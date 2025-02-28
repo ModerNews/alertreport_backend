@@ -1,5 +1,5 @@
 # Use Rust official image for building
-FROM rust:1.75-alpine as builder
+FROM rust:1.75-alpine AS builder
 WORKDIR /app
 
 # Cache dependencies
@@ -24,7 +24,7 @@ RUN sleep 10
 # WORKDIR /app
 
 # Copy the built binary
-COPY /app/target/release/alert_report_backend /app/alertreport
+COPY target/release/alert_report_backend /app/alertreport
 
 ENV ROCKET_ADDRESS=0.0.0.0
 

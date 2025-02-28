@@ -14,6 +14,11 @@ COPY . .
 # Build the final binary
 RUN cargo build --release
 
+RUN ls -lah .
+RUN ls -lah /app/target/release
+RUN cat src/main.rs
+RUN sleep 10
+
 # # Use a lightweight image for final container
 # FROM alpine:3.21 
 # WORKDIR /app

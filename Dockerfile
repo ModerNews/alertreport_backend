@@ -14,12 +14,12 @@ COPY . .
 # Build the final binary
 RUN cargo build --release
 
-# Use a lightweight image for final container
-FROM alpine:3.21 
-WORKDIR /app
+# # Use a lightweight image for final container
+# FROM alpine:3.21 
+# WORKDIR /app
 
 # Copy the built binary
-COPY --from=builder /app/target/release/alert_report_backend /app/alertreport
+COPY /app/target/release/alert_report_backend /app/alertreport
 
 ENV ROCKET_ADDRESS=0.0.0.0
 

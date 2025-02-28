@@ -17,8 +17,16 @@ async fn webhook(payload: Json<WebhookPayload>) {
     println!("{}", log_entry);
 }
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![webhook])
-}
+#[rocket::main]
+async fn main() {
+//    env_logger::init(); // Initialize logger
 
+    // Manually launch Rocket and handle errors
+    match rocket::build().mount("/", routes![webhook]).launch().await {
+        Ok(_) => info!("Rocket server shut down cleanly."),
+        Err(e) => {
+            error!("Rocket failed to launch: {}", e);
+            std::process::exit(1); // Exit with an error code
+        }
+    }
+}
